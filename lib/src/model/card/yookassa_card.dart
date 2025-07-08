@@ -5,7 +5,7 @@ part 'yookassa_card.g.dart';
 
 /// Данные банковской карты.
 @freezed
-class YookassaCard with _$YookassaCard {
+abstract class YookassaCard with _$YookassaCard {
   factory YookassaCard({
     required String last4,
     required String expiryYear,
