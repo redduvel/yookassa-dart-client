@@ -12,6 +12,7 @@ abstract class YookassaItem with _$YookassaItem {
     required String quantity,
     required Amount amount,
     @Default('commodity') String paymentSubject,
+    @Default('full_payment') String paymentMode,
     @Default('1') String vatCode,
   }) = _YookassaItem;
 

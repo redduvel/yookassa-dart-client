@@ -18,6 +18,7 @@ mixin _$YookassaItem {
   String get quantity;
   Amount get amount;
   String get paymentSubject;
+  String get paymentMode;
   String get vatCode;
 
   /// Create a copy of YookassaItem
@@ -43,17 +44,19 @@ mixin _$YookassaItem {
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.paymentSubject, paymentSubject) ||
                 other.paymentSubject == paymentSubject) &&
+            (identical(other.paymentMode, paymentMode) ||
+                other.paymentMode == paymentMode) &&
             (identical(other.vatCode, vatCode) || other.vatCode == vatCode));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, description, quantity, amount, paymentSubject, vatCode);
+  int get hashCode => Object.hash(runtimeType, description, quantity, amount,
+      paymentSubject, paymentMode, vatCode);
 
   @override
   String toString() {
-    return 'YookassaItem(description: $description, quantity: $quantity, amount: $amount, paymentSubject: $paymentSubject, vatCode: $vatCode)';
+    return 'YookassaItem(description: $description, quantity: $quantity, amount: $amount, paymentSubject: $paymentSubject, paymentMode: $paymentMode, vatCode: $vatCode)';
   }
 }
 
@@ -68,6 +71,7 @@ abstract mixin class $YookassaItemCopyWith<$Res> {
       String quantity,
       Amount amount,
       String paymentSubject,
+      String paymentMode,
       String vatCode});
 
   $AmountCopyWith<$Res> get amount;
@@ -89,6 +93,7 @@ class _$YookassaItemCopyWithImpl<$Res> implements $YookassaItemCopyWith<$Res> {
     Object? quantity = null,
     Object? amount = null,
     Object? paymentSubject = null,
+    Object? paymentMode = null,
     Object? vatCode = null,
   }) {
     return _then(_self.copyWith(
@@ -107,6 +112,10 @@ class _$YookassaItemCopyWithImpl<$Res> implements $YookassaItemCopyWith<$Res> {
       paymentSubject: null == paymentSubject
           ? _self.paymentSubject
           : paymentSubject // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentMode: null == paymentMode
+          ? _self.paymentMode
+          : paymentMode // ignore: cast_nullable_to_non_nullable
               as String,
       vatCode: null == vatCode
           ? _self.vatCode
@@ -220,7 +229,7 @@ extension YookassaItemPatterns on YookassaItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(String description, String quantity, Amount amount,
-            String paymentSubject, String vatCode)?
+            String paymentSubject, String paymentMode, String vatCode)?
         $default, {
     required TResult orElse(),
   }) {
@@ -228,7 +237,7 @@ extension YookassaItemPatterns on YookassaItem {
     switch (_that) {
       case _YookassaItem() when $default != null:
         return $default(_that.description, _that.quantity, _that.amount,
-            _that.paymentSubject, _that.vatCode);
+            _that.paymentSubject, _that.paymentMode, _that.vatCode);
       case _:
         return orElse();
     }
@@ -250,14 +259,14 @@ extension YookassaItemPatterns on YookassaItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(String description, String quantity, Amount amount,
-            String paymentSubject, String vatCode)
+            String paymentSubject, String paymentMode, String vatCode)
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _YookassaItem():
         return $default(_that.description, _that.quantity, _that.amount,
-            _that.paymentSubject, _that.vatCode);
+            _that.paymentSubject, _that.paymentMode, _that.vatCode);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -278,14 +287,14 @@ extension YookassaItemPatterns on YookassaItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(String description, String quantity, Amount amount,
-            String paymentSubject, String vatCode)?
+            String paymentSubject, String paymentMode, String vatCode)?
         $default,
   ) {
     final _that = this;
     switch (_that) {
       case _YookassaItem() when $default != null:
         return $default(_that.description, _that.quantity, _that.amount,
-            _that.paymentSubject, _that.vatCode);
+            _that.paymentSubject, _that.paymentMode, _that.vatCode);
       case _:
         return null;
     }
@@ -300,6 +309,7 @@ class _YookassaItem implements YookassaItem {
       required this.quantity,
       required this.amount,
       this.paymentSubject = 'commodity',
+      this.paymentMode = 'full_payment',
       this.vatCode = '1'});
   factory _YookassaItem.fromJson(Map<String, dynamic> json) =>
       _$YookassaItemFromJson(json);
@@ -313,6 +323,9 @@ class _YookassaItem implements YookassaItem {
   @override
   @JsonKey()
   final String paymentSubject;
+  @override
+  @JsonKey()
+  final String paymentMode;
   @override
   @JsonKey()
   final String vatCode;
@@ -344,17 +357,19 @@ class _YookassaItem implements YookassaItem {
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.paymentSubject, paymentSubject) ||
                 other.paymentSubject == paymentSubject) &&
+            (identical(other.paymentMode, paymentMode) ||
+                other.paymentMode == paymentMode) &&
             (identical(other.vatCode, vatCode) || other.vatCode == vatCode));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, description, quantity, amount, paymentSubject, vatCode);
+  int get hashCode => Object.hash(runtimeType, description, quantity, amount,
+      paymentSubject, paymentMode, vatCode);
 
   @override
   String toString() {
-    return 'YookassaItem(description: $description, quantity: $quantity, amount: $amount, paymentSubject: $paymentSubject, vatCode: $vatCode)';
+    return 'YookassaItem(description: $description, quantity: $quantity, amount: $amount, paymentSubject: $paymentSubject, paymentMode: $paymentMode, vatCode: $vatCode)';
   }
 }
 
@@ -371,6 +386,7 @@ abstract mixin class _$YookassaItemCopyWith<$Res>
       String quantity,
       Amount amount,
       String paymentSubject,
+      String paymentMode,
       String vatCode});
 
   @override
@@ -394,6 +410,7 @@ class __$YookassaItemCopyWithImpl<$Res>
     Object? quantity = null,
     Object? amount = null,
     Object? paymentSubject = null,
+    Object? paymentMode = null,
     Object? vatCode = null,
   }) {
     return _then(_YookassaItem(
@@ -412,6 +429,10 @@ class __$YookassaItemCopyWithImpl<$Res>
       paymentSubject: null == paymentSubject
           ? _self.paymentSubject
           : paymentSubject // ignore: cast_nullable_to_non_nullable
+              as String,
+      paymentMode: null == paymentMode
+          ? _self.paymentMode
+          : paymentMode // ignore: cast_nullable_to_non_nullable
               as String,
       vatCode: null == vatCode
           ? _self.vatCode
